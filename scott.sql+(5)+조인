@@ -1,0 +1,93 @@
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--조인
+--LEFT JOIN
+--FROM TABLEA A
+--LEFT JOIN TABLEB B
+--ON A.KEY=B.KEY
+
+--FROM TABLEA A
+--LEFT JOIN TABLEB B
+--ON A.KEY=B.KEY
+--WHERE B.KEY IS NULL
+
+--RIGHT JOIN
+--FROM TABLEA A
+--RIGHT JOIN TABLEB B
+--ON A.KEY=B.KEY
+
+--FROM TABLEA A
+--RIGHT JOIN TABLEB B
+--ON A.KEY=B.KEY
+--WHERE A.KEY IS NULL
+
+--INNER JOIN
+--FROM TABLEA A
+--INNER JOIN TABLEB B
+--ON A.KEY=B.KEY
+
+--FULL OUTER JOIN
+--FROM TABLEA A
+--FULL OUTER JOIN TABLEB B
+--ON A.KEY=B.KEY
+
+--FROM TABLEA A
+--FULL OUTER JOIN TABLEB B
+--ON A.KEY=B.KEY
+--WHERE A.KEY IS NULL OR B.KEY IS NULL 
+--------------------------------------------------------------------
+--SELECT * FROM EMP;
+--SELECT * FROM DEPT;
+SELECT * FROM EMP, DEPT;
+--------------------------------------------------------------------
+--SELECT * FROM EMP;
+--SELECT * FROM DEPT;
+SELECT EMPNO, ENAME, SAL, DEPT.DEPTNO
+FROM EMP, DEPT
+WHERE EMP.DEPTNO = DEPT.DEPTNO;
+-- = SELECT EMPNO, ENAME, SAL, DEPTNO FROM EMP;
+--------------------------------------------------------------------
+SELECT E.EMPNO, E.ENAME, E.SAL, D.DEPTNO, D.DNAME
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO;
+--SELECT * FROM EMP;
+--SELECT * FROM DEPT;
+--------------------------------------------------------------------
+SELECT E.EMPNO, E.ENAME, E.SAL, D.DEPTNO, D.DNAME
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO AND D.DEPTNO = 30;
+--------------------------------------------------------------------
+SELECT E.EMPNO, E.ENAME, E.SAL, D.DEPTNO, D.DNAME
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO AND E.JOB='SALESMAN';
+--------------------------------------------------------------------
+SELECT E.ENAME, E.JOB, D.LOC
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO AND E.COMM IS NOT NULL;
+--------------------------------------------------------------------
+SELECT  E.ENAME, E.JOB, D.LOC
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO AND E.ENAME LIKE '%A%';
+--------------------------------------------------------------------
+--SELECT * FROM SALGRADE;
+SELECT E. EMPNO, E.ENAME, E.JOB, E.SAL, S.GRADE
+FROM SALGRADE S, EMP E
+WHERE E.SAL BETWEEN S.LOSAL AND S.HISAL AND E.DEPTNO = 10;
+--------------------------------------------------------------------
+SELECT * FROM EMP;
+SELECT EMPLOYEE.ENAME AS 사원명, MANAGER.ENAME AS 관리자명
+FROM EMP EMPLOYEE, EMP MANAGER
+WHERE EMPLOYEE.MGR = MANAGER.EMPNO (+);
+
+--(SELECT ename FROM EMP WHERE empno = mgr);
+
+SELECT
+EMP.ENAME AS "사원명", EMP.EMPNO AS "EMP2",
+EMP.MGR AS "MGR2", MANAGER.ENAME AS "관리자명"
+FROM EMP LEFT OUTER JOIN EMP MANAGER ON EMP.MGR = MANAGER.EMPNO;
+
+
+
+
